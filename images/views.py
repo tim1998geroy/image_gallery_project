@@ -9,6 +9,7 @@ from cloudinary.exceptions import Error as Cloud_Error
 from .models import ImageItem
 from .serializers import ImageItemSerializer
 
+
 class ImageItemViewSet(viewsets.ModelViewSet):
     queryset = ImageItem.objects.all().order_by('-uploaded_at')
     serializer_class = ImageItemSerializer
@@ -17,10 +18,9 @@ class ImageItemViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         title = request.data.get('title')
         description = request.data.get('description', '')
-        image_file = request.FILES.get('image')
+        image_file = request.FILES.get('file')
 
-        if not title:
-            return Response({'error': 'Поле "title" обязательно'}, status=status.HTTP_400_BAD_REQUEST)
+        print(request.FILES.keys())
 
         if not image_file:
             return Response({'error': 'Необходимо прикрепить файл изображения'}, status=status.HTTP_400_BAD_REQUEST)
@@ -32,13 +32,13 @@ class ImageItemViewSet(viewsets.ModelViewSet):
                 title=title,
                 description=description,
                 image_url=upload_result.get('secure_url'),
-                public_id=upload_result.get('public_id')
+                cloudinary_public_id=upload_result.get('public_id')
             )
 
             serializer = self.get_serializer(image_item)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        except Exception as e:  # или CloudError, если импортирован
+        except Cloud_Error as e:  # или CloudError, если импортирован
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
