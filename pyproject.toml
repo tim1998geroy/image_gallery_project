@@ -1,0 +1,20 @@
+[project]
+name = "imagesmet"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Тимофей",email = "tim1998geroy@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "djangorestframework (>=3.16.1,<4.0.0)",
+    "psycopg2-binary (>=2.9.11,<3.0.0)",
+    "cloudinary (>=1.44.1,<2.0.0)",
+    "python-decouple (>=3.8,<4.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
