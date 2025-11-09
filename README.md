@@ -30,7 +30,7 @@ API предоставляет полный CRUD-функционал для р�
 ### 1\. Клонирование репозитория
 
 ```bash
-git clone https://github.com/amangulov03/Image-Gallery-API.git
+git clone git@github.com:tim1998geroy/image_gallery_project.git
 cd Image-Gallery-API
 ```
 
